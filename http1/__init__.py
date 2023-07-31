@@ -6,6 +6,10 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
+    xarr = req.headers.get("X-ARR-ClientCert")
+    
+    logging.info(xarr)
+
     # load OpenSSL.crypto
     from OpenSSL import crypto
     
