@@ -20,8 +20,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     # get various properties of said file.
     # note these are PyOpenSSL objects, not strings although you
     # can convert them to PEM-encoded strings.
-    p12.get_certificate()     # (signed) certificate object
+    cert = p12.get_certificate()     # (signed) certificate object
     logging.info(p12.get_certificate().get_issuer())      # private key.
+    thumbprint = cert.digest("sha1").decode("utf-8")
+    logging.info(thumbprint)
     p12.get_ca_certificates() # ca chain.
 
     name = req.params.get('name')
